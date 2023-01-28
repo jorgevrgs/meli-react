@@ -19,7 +19,6 @@ describe("SearchInput", () => {
 
   it("should render", () => {
     const actual = renderer.getRenderOutput();
-    console.log({ actual: typeof actual.props.children[1].type });
     expect(actual.props.children[0].type).toBe("input");
     expect(actual.props.children[1].type).toBeInstanceOf(Function);
   });

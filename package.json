@@ -26,6 +26,7 @@
     "packages/*"
   ],
   "devDependencies": {
+    "@cucumber/cucumber": "8.10.0",
     "@tsconfig/recommended": "1.0.2",
     "typescript": "4.9.4",
     "vitest": "0.28.3"

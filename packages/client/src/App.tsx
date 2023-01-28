@@ -1,7 +1,8 @@
-import "./App.scss";
+import { RouterProvider } from "react-router-dom";
+import router from "./plugins/router.plugin";
 
 function App() {
-  return <div className="App">Hello World</div>;
+  return <RouterProvider router={router} />;
 }
 
 export default App;

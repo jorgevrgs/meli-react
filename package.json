@@ -5,6 +5,7 @@
   "main": "index.js",
   "private": true,
   "scripts": {
+    "dev": "pnpm -r --parallel --filter='./packages/*' run dev",
     "test": "vitest",
     "coverage": "vitest run --coverage"
   },

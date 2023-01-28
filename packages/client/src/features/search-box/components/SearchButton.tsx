@@ -1,6 +1,20 @@
-export default function SearchButton() {
+import { MouseEventHandler } from "react";
+
+interface SearchButtonProps {
+  onClick?: MouseEventHandler<HTMLButtonElement>;
+}
+
+export default function SearchButton({ onClick }: SearchButtonProps) {
+  const handleOnClick: MouseEventHandler<HTMLButtonElement> = (e) => {
+    onClick?.(e);
+  };
+
   return (
-    <button type="button" className="search-box__button">
+    <button
+      type="button"
+      className="search-box__button"
+      onClick={handleOnClick}
+    >
       <img
         srcSet="/images/ic_Search.png, /images/ic_Search@2x.png 2x"
         src="/images/ic_Search.png"

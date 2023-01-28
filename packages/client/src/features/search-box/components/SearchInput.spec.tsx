@@ -1,12 +1,12 @@
-import { render, screen } from "@testing-library/react";
+import { createRenderer } from "react-test-renderer/shallow";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import SearchInput from "./SearchInput";
 
 describe("SearchInput", () => {
-  beforeEach(() => {
-    render(<SearchInput />);
+  const renderer = createRenderer();
 
-    screen.debug();
+  beforeEach(() => {
+    renderer.render(<SearchInput />);
   });
 
   afterEach(() => {
@@ -14,6 +14,9 @@ describe("SearchInput", () => {
   });
 
   it("should render", () => {
-    expect(screen.getByText("SearchInput")).toBeDefined();
+    const actual = renderer.getRenderOutput();
+    console.log({ actual: typeof actual.props.children[1].type });
+    expect(actual.props.children[0].type).toBe("input");
+    expect(actual.props.children[1].type).toBeInstanceOf(Function);
   });
 });

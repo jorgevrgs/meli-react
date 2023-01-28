@@ -14,6 +14,7 @@ export default function SearchButton({ onClick }: SearchButtonProps) {
       type="button"
       className="search-box__button"
       onClick={handleOnClick}
+      role="button"
     >
       <img
         srcSet="/images/ic_Search.png, /images/ic_Search@2x.png 2x"

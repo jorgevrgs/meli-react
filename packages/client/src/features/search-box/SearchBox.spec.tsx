@@ -1,12 +1,12 @@
-import { render, screen } from "@testing-library/react";
+import { createRenderer } from "react-test-renderer/shallow";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import SearchBox from "./SearchBox";
 
 describe("SearchBox", () => {
-  beforeEach(() => {
-    render(<SearchBox />);
+  const renderer = createRenderer();
 
-    screen.debug();
+  beforeEach(() => {
+    renderer.render(<SearchBox />);
   });
 
   afterEach(() => {
@@ -14,6 +14,7 @@ describe("SearchBox", () => {
   });
 
   it("should render", () => {
-    expect(screen.getByText("SearchBox")).toBeDefined();
+    const actual = renderer.getRenderOutput();
+    expect(actual.props.className).toBe("search-box");
   });
 });

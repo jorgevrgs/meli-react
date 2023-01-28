@@ -4,9 +4,13 @@ import SearchInput from "./SearchInput";
 
 describe("SearchInput", () => {
   const renderer = createRenderer();
+  const onSearch = vi.fn();
+  const mockEvent = {
+    preventDefault: vi.fn(),
+  };
 
   beforeEach(() => {
-    renderer.render(<SearchInput />);
+    renderer.render(<SearchInput onSearch={onSearch} />);
   });
 
   afterEach(() => {
@@ -18,5 +22,13 @@ describe("SearchInput", () => {
     console.log({ actual: typeof actual.props.children[1].type });
     expect(actual.props.children[0].type).toBe("input");
     expect(actual.props.children[1].type).toBeInstanceOf(Function);
+  });
+
+  it("should call onSearch when the button is clicked", () => {
+    const actual = renderer.getRenderOutput();
+    const button = actual.props.children[1];
+    button.props.onClick(mockEvent);
+    expect(onSearch).toHaveBeenCalled();
+    expect(mockEvent.preventDefault).toHaveBeenCalled();
   });
 });

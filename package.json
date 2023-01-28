@@ -2,13 +2,12 @@
   "name": "meli-react",
   "version": "1.0.0",
   "description": "> Product search bar using the MELI API with NodeJS and React",
-  "main": "index.js",
   "private": true,
   "scripts": {
     "dev": "pnpm -r --parallel --filter='./packages/*' run dev",
     "linter": "eslint .",
-    "test": "vitest",
-    "coverage": "vitest run --coverage"
+    "test": "pnpm -r --parallel --filter='./packages/*' run test",
+    "coverage": "pnpm -r --parallel --filter='./packages/*' run coverage"
   },
   "repository": {
     "type": "git",
@@ -16,7 +15,7 @@
   },
   "keywords": [],
   "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/jorgevrgs/meli-react/issues"
   },

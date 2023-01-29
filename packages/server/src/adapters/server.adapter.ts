@@ -1,6 +1,6 @@
 import { loadControllers, scopePerRequest } from 'awilix-express';
 import type { ErrorRequestHandler, RequestHandler } from 'express';
-import createError from 'http-errors';
+import createHttpError from 'http-errors';
 import app from '../apps/express.app';
 import container from './container.adapter';
 
@@ -8,7 +8,7 @@ app.use(scopePerRequest(container));
 app.use(loadControllers('../routes/*.route.ts', { cwd: __dirname }));
 
 const notFoundErrorHandler: RequestHandler = (req, res, next) => {
-  next(createError(404));
+  next(createHttpError(404));
 };
 
 const defaultErrorHandler: ErrorRequestHandler = (err, req, res, next) => {

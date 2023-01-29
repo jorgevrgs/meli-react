@@ -7,11 +7,11 @@ import container from './container.adapter';
 app.use(scopePerRequest(container));
 app.use(loadControllers('../routes/*.route.ts', { cwd: __dirname }));
 
-const notFoundErrorHandler: RequestHandler = (req, res, next) => {
+const notFoundErrorHandler: RequestHandler = (_req, _res, next) => {
   next(createHttpError(404));
 };
 
-const defaultErrorHandler: ErrorRequestHandler = (err, req, res, next) => {
+const defaultErrorHandler: ErrorRequestHandler = (err, _req, res) => {
   res.status(err.status ?? 500).json({
     code: err.status ?? 500,
     success: false,

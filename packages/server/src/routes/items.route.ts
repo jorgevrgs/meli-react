@@ -13,7 +13,8 @@ export class ItemsRoute implements BaseController {
   @route('/')
   @GET()
   async findAll(req: Request, res: Response) {
-    const items = await this.itemsService.findAll();
+    const search = req.query.q as string | undefined;
+    const items = await this.itemsService.findAll(search);
     res.json(items);
   }
 

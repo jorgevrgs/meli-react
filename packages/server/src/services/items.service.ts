@@ -28,7 +28,9 @@ export class ItemsService {
       throw createHttpError(statusCode, 'Error fetching items');
     }
 
-    return body.json();
+    const items = await body.json();
+
+    return { items: items.results };
   }
 
   async findOne(id: string) {

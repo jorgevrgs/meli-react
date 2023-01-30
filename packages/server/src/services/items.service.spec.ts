@@ -1,5 +1,6 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { ItemsService } from './items.service';
+import { author, item } from './__fixtures__/items.fixture';
 
 describe('ItemService', () => {
   let service: ItemsService;
@@ -18,12 +19,25 @@ describe('ItemService', () => {
 
   it('should return an item', async () => {
     const actual = await service.findOne('200');
-    expect(actual).toEqual({ id: '200', title: 'Item 200' });
+    expect(JSON.parse(JSON.stringify(actual))).toEqual({ author, item });
   });
 
   it('should return a list of items', async () => {
     const actual = await service.findAll('iphone');
-    expect(actual).toEqual([{ id: '200', title: 'Item 200' }]);
+    expect(actual).toEqual([
+      {
+        id: '200',
+        title: 'Item 200',
+        currency_id: 'COP',
+        shipping: {
+          free_shipping: true,
+        },
+        sold_quantity: 0,
+        secure_thumbnail: 'https://http2.mlstatic.com/D_200.jpg',
+        condition: 'new',
+        price: 200,
+      },
+    ]);
   });
 
   it('should throw an error for an item', async () => {

@@ -5,7 +5,7 @@ import app from '../apps/express.app';
 import container from './container.adapter';
 
 app.use(scopePerRequest(container));
-app.use(loadControllers('../routes/*.route.ts', { cwd: __dirname }));
+app.use('/api', loadControllers('../routes/*.route.ts', { cwd: __dirname }));
 
 const notFoundErrorHandler: RequestHandler = (_req, _res, next) => {
   next(createHttpError(404));

@@ -1,4 +1,5 @@
 import { asClass, createContainer } from 'awilix';
+import 'reflect-metadata';
 import { ItemsService } from '../services/items.service';
 
 const container = createContainer();

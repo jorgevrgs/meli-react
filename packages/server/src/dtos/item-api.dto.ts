@@ -1,11 +1,12 @@
-import { Expose, Type } from 'class-transformer';
+import { Expose, Transform, Type } from 'class-transformer';
 import { AuthorDto } from './author.dto';
 import { ItemDto } from './item.dto';
 
 export class ItemApiDto {
-  @Expose()
+  @Expose({ toClassOnly: true })
   @Type(() => AuthorDto)
-  'author': AuthorDto;
+  @Transform(() => new AuthorDto())
+  readonly 'author': AuthorDto;
 
   @Expose()
   @Type(() => ItemDto)

@@ -1,9 +1,33 @@
-import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
+import mockedEnv from 'mocked-env';
+import {
+  afterAll,
+  afterEach,
+  beforeAll,
+  beforeEach,
+  describe,
+  expect,
+  it,
+  vi,
+} from 'vitest';
 import { ItemsService } from './items.service';
 import { author, item } from './__fixtures__/items.fixture';
 
 describe('ItemService', () => {
   let service: ItemsService;
+  let restoreEnv: () => void;
+
+  beforeAll(() => {
+    restoreEnv = mockedEnv({
+      SITE_ID: 'MLA',
+      DEFAULT_PAGINATION_LIMIT: '4',
+      AUTHOR_FIRST_NAME: 'John',
+      AUTHOR_LAST_NAME: 'Doe',
+    });
+  });
+
+  afterAll(() => {
+    restoreEnv();
+  });
 
   beforeEach(() => {
     service = new ItemsService();
@@ -24,20 +48,22 @@ describe('ItemService', () => {
 
   it('should return a list of items', async () => {
     const actual = await service.findAll('iphone');
-    expect(actual).toEqual([
-      {
-        id: '200',
-        title: 'Item 200',
-        currency_id: 'COP',
-        shipping: {
-          free_shipping: true,
+    expect(actual).toEqual({
+      items: [
+        {
+          id: '200',
+          title: 'Item 200',
+          currency_id: 'COP',
+          shipping: {
+            free_shipping: true,
+          },
+          sold_quantity: 0,
+          secure_thumbnail: 'https://http2.mlstatic.com/D_200.jpg',
+          condition: 'new',
+          price: 200,
         },
-        sold_quantity: 0,
-        secure_thumbnail: 'https://http2.mlstatic.com/D_200.jpg',
-        condition: 'new',
-        price: 200,
-      },
-    ]);
+      ],
+    });
   });
 
   it('should throw an error for an item', async () => {

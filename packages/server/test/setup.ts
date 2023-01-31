@@ -68,14 +68,16 @@ client
 
 client
   .intercept({
-    path: '/sites/MLA/search?q=iphone',
+    path: '/sites/MLA/search?limit=4&q=iphone',
     method: 'GET',
   })
-  .reply(200, [item]);
+  .reply(200, {
+    results: [item],
+  });
 
 client
   .intercept({
-    path: '/sites/MLA/search?q=error',
+    path: '/sites/MLA/search?limit=4&q=error',
     method: 'GET',
   })
   .reply(400, []);

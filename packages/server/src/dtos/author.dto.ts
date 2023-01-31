@@ -4,9 +4,9 @@ import { IsString } from 'class-validator';
 export class AuthorDto {
   @IsString()
   @Expose()
-  'name': string;
+  readonly 'name': string = process.env.AUTHOR_FIRST_NAME ?? 'Jorge';
 
   @IsString()
   @Expose()
-  'lastname': string;
+  readonly 'lastname': string = process.env.AUTHOR_LAST_NAME ?? 'Vargas';
 }

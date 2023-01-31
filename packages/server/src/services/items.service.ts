@@ -15,8 +15,11 @@ export class ItemsService {
   private readonly 'itemDescriptionUrl' = MELI_ITEM_DESCRIPTION_URL;
   private readonly 'currencyUrl' = MELI_CURRENCY_URL;
 
+  private PAGINATION_LIMIT = process.env.DEFAULT_PAGINATION_LIMIT ?? '4';
+
   async findAll(query?: string) {
     const url = new URL(this.searchUrl);
+    url.searchParams.append('limit', this.PAGINATION_LIMIT);
 
     if (query) {
       url.searchParams.append('q', query);
@@ -64,10 +67,6 @@ export class ItemsService {
     return plainToClass(
       ItemApiDto,
       {
-        author: {
-          name: 'John',
-          lastname: 'Doe',
-        },
         item: {
           ...itemBody,
           currency: currencyBody,

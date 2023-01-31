@@ -1,4 +1,4 @@
-import { useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useGetItemsQuery } from "../features/items/services/items.service";
 
 export default function SearchResultsPage() {
@@ -15,13 +15,16 @@ export default function SearchResultsPage() {
 
   return (
     <>
+      {/* FIXME: Add listing components */}
       {isFetching && <div>Loading...</div>}
       {error && <div>Error: {String(error)}</div>}
       {data && (
         <div>
           Results for {search}:{" "}
           {data.items.map((item) => (
-            <div key={item.id}>{item.title}</div>
+            <Link key={item.id} to={`/items/${item.id}`}>
+              <div key={item.id}>{item.title}</div>
+            </Link>
           ))}
         </div>
       )}

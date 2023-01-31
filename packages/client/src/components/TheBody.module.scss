@@ -1,0 +1,18 @@
+@import "../styles/variables.scss";
+
+.body {
+  display: flex;
+  background-color: $backgroundColor;
+  width: 100vw;
+  min-height: calc(100vh - 5em);
+
+  &__container {
+    width: 100%;
+    max-width: 1100px;
+    margin-inline: auto;
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    border-radius: 0.25rem;
+  }
+}

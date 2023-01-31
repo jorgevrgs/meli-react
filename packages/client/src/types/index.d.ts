@@ -9,12 +9,18 @@ export interface Price {
   decimal: number;
 }
 
+export enum Condition {
+  new = "new",
+  used = "used",
+  not_specified = "not_specified",
+}
+
 export interface Item {
   id: string;
   title: string;
   price: Price;
   picture: string;
-  condition: string;
+  condition: Condition;
   free_shipping: boolean;
   sold_quantity: number;
   description: string;

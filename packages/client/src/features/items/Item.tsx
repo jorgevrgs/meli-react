@@ -1,5 +1,6 @@
 import ReactMarkdown from "react-markdown";
 import type { ItemResult } from "../../types";
+import Picture from "./components/Picture";
 import Price from "./components/Price";
 import styles from "./Item.module.scss";
 
@@ -20,7 +21,7 @@ export default function Item({
   return (
     <article className={styles.item}>
       <div className={styles.details}>
-        <img src={picture} alt={title} className={styles.details__image} />
+        <Picture src={picture} alt={title} className={styles.details__image} />
         <div className={styles.details__content}>
           <div className={styles.details__condition}>
             <span>{conditionDefinition[condition]}</span> -{" "}

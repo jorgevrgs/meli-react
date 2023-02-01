@@ -1,4 +1,5 @@
 import { MouseEventHandler } from "react";
+import Icon from "../../../components/Icon";
 
 interface SearchButtonProps {
   onClick?: MouseEventHandler<HTMLButtonElement>;
@@ -15,12 +16,9 @@ export default function SearchButton({ onClick }: SearchButtonProps) {
       className="search-box__button"
       onClick={handleOnClick}
       role="button"
+      title="Search Button"
     >
-      <img
-        srcSet="/images/ic_Search.png, /images/ic_Search@2x.png 2x"
-        src="/images/ic_Search.png"
-        alt="Search Button"
-      />
+      <Icon name="ic_Search" alt="Search Button" />
     </button>
   );
 }

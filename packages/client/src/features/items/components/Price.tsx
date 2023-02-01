@@ -22,7 +22,9 @@ export default function Price({
         })}
       </span>
 
-      <span className={styles.price__fraction}>{decimals}</span>
+      {decimal > 0 && (
+        <span className={styles.price__fraction}>{decimals}</span>
+      )}
     </div>
   );
 }

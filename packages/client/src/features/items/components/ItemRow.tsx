@@ -16,8 +16,8 @@ export default function ItemRow({
     <section className={styles.item}>
       <Picture src={picture} alt={title} width="180" height="180" />
       <div className={styles.item__content}>
-        <div className={styles.item__price}>
-          <Price {...price} />
+        <div className={styles.item__costs}>
+          <Price {...price} className={styles.item__costs__price} />
           {free_shipping && (
             <figure>
               <Icon name="ic_shipping" alt="Envío gratis" />
@@ -25,7 +25,7 @@ export default function ItemRow({
           )}
         </div>
         <Link to={`/items/${id}`}>
-          <h4>{title}</h4>
+          <h4 className={styles.item__title}>{title}</h4>
         </Link>
       </div>
     </section>

@@ -5,7 +5,12 @@ type PriceProps = ItemResult["item"]["price"] & {
   className?: string;
 };
 
-export default function Price({ amount, currency, decimal }: PriceProps) {
+export default function Price({
+  amount,
+  currency,
+  decimal,
+  className,
+}: PriceProps) {
   const decimals = ((amount % 1) * 10 ** decimal)
     .toFixed(0)
     .padStart(decimal, "0");
@@ -13,7 +18,7 @@ export default function Price({ amount, currency, decimal }: PriceProps) {
 
   return (
     <div className={styles.price}>
-      <span>
+      <span className={className}>
         {amount.toLocaleString(locale, {
           style: "currency",
           currency,

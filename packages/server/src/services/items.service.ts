@@ -8,6 +8,7 @@ import {
   MELI_SEARCH_URL,
 } from '../constants/urls.constant';
 import { ItemApiDto } from '../dtos/item-api.dto';
+import { ItemsApiDto } from '../dtos/items-api.dto';
 
 export class ItemsService {
   private readonly 'searchUrl' = MELI_SEARCH_URL;
@@ -31,9 +32,34 @@ export class ItemsService {
       throw createHttpError(statusCode, 'Error fetching items');
     }
 
-    const items = await body.json();
+    const itemsBody = await body.json();
 
-    return { items: items.results };
+    const currencies: string[] = Array.from(
+      new Set(itemsBody.results.map((item: any) => item.currency_id))
+    );
+
+    const currenciesPromises = currencies.map((currencyId) =>
+      request(this.currencyUrl.replace(':id', currencyId))
+    );
+
+    const currenciesResponses = await Promise.all(currenciesPromises);
+
+    const currenciesBodies = await Promise.all(
+      currenciesResponses.map((response) => response.body.json())
+    );
+
+    return plainToClass(
+      ItemsApiDto,
+      {
+        items: itemsBody.results.map((i: any) => ({
+          ...i,
+          currency: currenciesBodies.find((c) => c.id === i.currency_id),
+        })),
+      },
+      {
+        excludeExtraneousValues: true,
+      }
+    );
   }
 
   async findOne(id: string) {

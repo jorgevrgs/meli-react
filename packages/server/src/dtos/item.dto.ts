@@ -35,7 +35,7 @@ export class ItemDto {
 
   @IsString()
   @IsUrl()
-  @Expose({ name: 'secure_thumbnail' })
+  @Expose({ name: 'thumbnail' })
   'picture': string;
 
   @IsString()
@@ -54,7 +54,7 @@ export class ItemDto {
 
   @IsString()
   @Expose({ name: 'description' })
-  @Transform(({ value }) => value.plain_text)
+  @Transform(({ value }) => value && value.plain_text)
   @Type(() => ItemDescriptionDto)
   'description': string;
 }

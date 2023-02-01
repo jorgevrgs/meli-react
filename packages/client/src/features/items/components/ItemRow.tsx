@@ -1,6 +1,8 @@
 import { Link } from "react-router-dom";
 import Icon from "../../../components/Icon";
 import { ItemsResult } from "../../../types";
+import styles from "./ItemRow.module.scss";
+import Picture from "./Picture";
 import Price from "./Price";
 
 export default function ItemRow({
@@ -11,21 +13,21 @@ export default function ItemRow({
   free_shipping,
 }: ItemsResult["items"][number]) {
   return (
-    <Link to={`/items/${id}`}>
-      <section>
-        <img src={picture} alt={title} width="180" height="180" />
-        <div>
-          <div>
-            <Price {...price} />
-            {free_shipping && (
-              <figure>
-                <Icon name="ic_shipping" alt="Envío gratis" />
-              </figure>
-            )}
-          </div>
-          <h4>{title}</h4>
+    <section className={styles.item}>
+      <Picture src={picture} alt={title} width="180" height="180" />
+      <div className={styles.item__content}>
+        <div className={styles.item__price}>
+          <Price {...price} />
+          {free_shipping && (
+            <figure>
+              <Icon name="ic_shipping" alt="Envío gratis" />
+            </figure>
+          )}
         </div>
-      </section>
-    </Link>
+        <Link to={`/items/${id}`}>
+          <h4>{title}</h4>
+        </Link>
+      </div>
+    </section>
   );
 }

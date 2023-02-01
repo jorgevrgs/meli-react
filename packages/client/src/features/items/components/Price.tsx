@@ -1,11 +1,11 @@
 import type { ItemResult } from "../../../types";
 import styles from "./Price.module.scss";
 
-export default function Price({
-  amount,
-  currency,
-  decimal,
-}: ItemResult["item"]["price"]) {
+type PriceProps = ItemResult["item"]["price"] & {
+  className?: string;
+};
+
+export default function Price({ amount, currency, decimal }: PriceProps) {
   const decimals = ((amount % 1) * 10 ** decimal)
     .toFixed(0)
     .padStart(decimal, "0");

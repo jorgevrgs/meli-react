@@ -1,0 +1,8 @@
+.item {
+  display: flex;
+  padding-block: 1rem;
+
+  &__price {
+    display: flex;
+  }
+}

@@ -7,9 +7,11 @@
     "build": "pnpm -r --filter='./packages/*' run build",
     "preinstall": "npx only-allow pnpm",
     "dev": "dotenv -e .env.local -- pnpm -r --parallel --filter='./packages/*' run dev",
+    "start": "pnpm -r --parallel --filter='./packages/*' run start",
     "lint": "eslint .",
     "test": "pnpm -r --parallel --filter='./packages/*' run test-ci",
-    "coverage": "pnpm -r --parallel --filter='./packages/*' run coverage"
+    "coverage": "pnpm -r --parallel --filter='./packages/*' run coverage",
+    "test:e2e": "DEBUG=pw:api cucumber-js test/features/**/**/*.feature --require-module ts-node/register --require test/steps/**/**/*.ts"
   },
   "repository": {
     "type": "git",
@@ -29,10 +31,15 @@
   "workspaces": [
     "packages/*"
   ],
-  "devDependencies": {
+  "dependencies": {
     "@cucumber/cucumber": "8.10.0",
+    "@cucumber/messages": "21.0.1",
+    "fs-extra": "11.1.0"
+  },
+  "devDependencies": {
     "@playwright/test": "1.30.0",
     "@tsconfig/recommended": "1.0.2",
+    "@types/fs-extra": "11.0.1",
     "@types/node": "18.11.18",
     "@typescript-eslint/eslint-plugin": "5.49.0",
     "@typescript-eslint/parser": "5.49.0",

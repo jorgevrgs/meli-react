@@ -86,7 +86,33 @@ Open [http://localhost:5173](http://localhost:5173) with your browser to see the
 pnpm test
 ```
 
+For an e2e test, start the server `pnpm run dev` and run the following command:
+
+```bash
+pnpm test:e2e
+```
+
 ### Deployment
+
+To deploy the app to [Vercel](https://vercel.com/), you need to create a new project and link it to the repository. Then, you can deploy the app using the Vercel CLI or the Vercel dashboard.
+
+Additionally, a Dockerfile and docker-compose.yml are included to deploy the app using Docker. To build the image, run the following command:
+
+```bash
+docker build -t meli-react .
+```
+
+To run the app using Docker, run the following command:
+
+```bash
+docker run -p 4173:4173 meli-react
+```
+
+Or, use docker-compose:
+
+```bash
+docker-compose up
+```
 
 ## Authors
 

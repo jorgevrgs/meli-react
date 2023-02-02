@@ -1,0 +1,24 @@
+version: "3"
+
+services:
+  app:
+    container_name: meli_react
+    image: meli_react:latest
+    build: .
+    environment:
+      SITE_ID: ${SITE_ID:-MCO}
+      DEFAULT_PAGINATION_LIMIT: ${DEFAULT_PAGINATION_LIMIT:-4}
+      AUTHOR_FIRST_NAME: ${AUTHOR_FIRST_NAME:-Jorge}
+      AUTHOR_LAST_NAME: ${AUTHOR_LAST_NAME:-Vargas}
+    networks:
+      - meli_react
+    ports:
+      - 4173:4173
+    restart: always
+    volumes:
+      - .:/app
+      - /app/node_modules
+
+networks:
+  meli_react:
+    driver: bridge

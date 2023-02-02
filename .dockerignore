@@ -1,0 +1,10 @@
+.git
+.github
+.gitignore
+Dockerfile
+*.md
+node_modules
+screenshots
+traces
+test
+dist

@@ -9,6 +9,9 @@ describe("SearchBox", () => {
     vi.mock("react-router-dom", () => ({
       useNavigate: () => vi.fn(),
     }));
+    vi.mock("../../hooks/store.hook", () => ({
+      useAppSelector: () => ({ searchBy: "test" }),
+    }));
     renderer.render(<SearchBox />);
   });
 

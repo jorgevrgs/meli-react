@@ -2,12 +2,16 @@ import type { MouseEventHandler } from "react";
 import { useEffect, useRef, useState } from "react";
 import SearchButton from "./SearchButton";
 
-interface SearchBoxInputProps {
+interface SearchInputProps {
+  defaultValue?: string;
   onSearch?: (value: string) => void;
 }
 
-export default function SearchBoxInput({ onSearch }: SearchBoxInputProps) {
-  const [value, setValue] = useState("");
+export default function SearchInput({
+  onSearch,
+  defaultValue,
+}: SearchInputProps) {
+  const [value, setValue] = useState(defaultValue || "");
   const ref = useRef<HTMLInputElement>(null);
 
   const emitSearch = () => {
@@ -29,6 +33,12 @@ export default function SearchBoxInput({ onSearch }: SearchBoxInputProps) {
 
     emitSearch();
   };
+
+  useEffect(() => {
+    if (defaultValue) {
+      setValue(defaultValue);
+    }
+  }, [defaultValue]);
 
   useEffect(() => {
     ref.current?.focus();

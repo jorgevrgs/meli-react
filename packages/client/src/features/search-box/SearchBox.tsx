@@ -1,9 +1,11 @@
 import { useNavigate } from "react-router-dom";
-import SearchBoxInput from "./components/SearchInput";
+import { useAppSelector } from "../../hooks/store.hook";
+import SearchInput from "./components/SearchInput";
 import "./SearchBox.scss";
 
 export default function SearchBox() {
   const navigate = useNavigate();
+  const { searchBy } = useAppSelector((state) => state.search);
 
   const handleSearch = (value: string) => {
     if (value) {
@@ -13,7 +15,7 @@ export default function SearchBox() {
 
   return (
     <div className="search-box">
-      <SearchBoxInput onSearch={handleSearch} />
+      <SearchInput onSearch={handleSearch} defaultValue={searchBy} />
     </div>
   );
 }

@@ -58,22 +58,33 @@ export class ItemsService {
     );
 
     // Find the most relevant category id
-    const mostRelevantCategoryId = itemsBody.available_filters.find(
-      (filter) => filter.id === 'category'
-    )?.values[0].id;
-
     let categoryBody: CategoryResponse | null = null;
 
-    if (mostRelevantCategoryId) {
-      const category = await request(
-        this.categoryUrl.replace(':id', mostRelevantCategoryId)
-      );
+    // First option: find the category in the filters
+    const categoryFilter = itemsBody.filters.find(
+      (filter) => filter.id === 'category'
+    );
 
-      if (category.statusCode !== 200) {
-        throw createHttpError(category.statusCode, 'Error fetching category');
+    if (categoryFilter) {
+      categoryBody = categoryFilter.values[0];
+    } else {
+      // Second option: find the category in the available filters
+
+      const mostRelevantCategoryId = itemsBody.available_filters.find(
+        (filter) => filter.id === 'category'
+      )?.values[0].id;
+
+      if (mostRelevantCategoryId) {
+        const category = await request(
+          this.categoryUrl.replace(':id', mostRelevantCategoryId)
+        );
+
+        if (category.statusCode !== 200) {
+          throw createHttpError(category.statusCode, 'Error fetching category');
+        }
+
+        categoryBody = await category.body.json();
       }
-
-      categoryBody = await category.body.json();
     }
 
     return plainToClass(

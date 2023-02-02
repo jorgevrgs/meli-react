@@ -1,3 +1,5 @@
+import { CategoryResponse } from './category';
+
 export interface SearchItemsResponse {
   site_id: string;
   country_default_time_zone: string;
@@ -6,7 +8,7 @@ export interface SearchItemsResponse {
   results: Result[];
   sort: Country;
   available_sorts: Country[];
-  filters: any[];
+  filters: Filter[];
   available_filters: Availablefilter[];
 }
 
@@ -16,6 +18,10 @@ interface Availablefilter {
   type: string;
   values: Value2[];
 }
+
+type Filter = Omit<Availablefilter, 'values'> & {
+  values: Omit<Values2, 'results'> & CategoryResponse['path_from_root'];
+};
 
 interface Value2 {
   id: string;

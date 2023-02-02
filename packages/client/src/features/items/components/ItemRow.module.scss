@@ -1,0 +1,25 @@
+.item {
+  display: flex;
+  padding-block: 1rem;
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 1rem;
+  }
+
+  &__costs {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+
+    &__price {
+      font-size: 1.8rem;
+    }
+  }
+
+  &__title {
+    font-size: 1.5rem;
+  }
+}

@@ -2,10 +2,14 @@
   "name": "meli-react",
   "version": "1.0.0",
   "description": "> Product search bar using the MELI API with NodeJS and React",
-  "main": "index.js",
   "private": true,
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "pnpm -r --filter='./packages/*' run build",
+    "preinstall": "npx only-allow pnpm",
+    "dev": "dotenv -e .env.local -- pnpm -r --parallel --filter='./packages/*' run dev",
+    "lint": "eslint .",
+    "test": "pnpm -r --parallel --filter='./packages/*' run test-ci",
+    "coverage": "pnpm -r --parallel --filter='./packages/*' run coverage"
   },
   "repository": {
     "type": "git",
@@ -13,7 +17,7 @@
   },
   "keywords": [],
   "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/jorgevrgs/meli-react/issues"
   },
@@ -26,8 +30,15 @@
     "packages/*"
   ],
   "devDependencies": {
+    "@cucumber/cucumber": "8.10.0",
+    "@playwright/test": "1.30.0",
     "@tsconfig/recommended": "1.0.2",
-    "typescript": "4.9.4",
-    "vitest": "0.28.3"
+    "@types/node": "18.11.18",
+    "@typescript-eslint/eslint-plugin": "5.49.0",
+    "@typescript-eslint/parser": "5.49.0",
+    "dotenv-cli": "7.0.0",
+    "eslint": "8.32.0",
+    "ts-node": "10.9.1",
+    "typescript": "4.9.4"
   }
 }

@@ -1,0 +1,10 @@
+.price {
+  font-size: 3.5rem;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+
+  &__fraction {
+    font-size: 1.8rem;
+  }
+}

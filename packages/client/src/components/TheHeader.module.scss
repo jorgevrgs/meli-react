@@ -1,0 +1,18 @@
+@import "../styles/variables.scss";
+
+.header {
+  display: flex;
+  background-color: $meliColor;
+  padding-block: 1rem;
+  width: 100vw;
+
+  &__section {
+    width: 100%;
+    max-width: 1100px;
+    margin-inline: auto;
+    display: flex;
+    justify-content: space-between;
+    gap: 2rem;
+    align-items: center;
+  }
+}

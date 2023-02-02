@@ -1,7 +1,13 @@
 import 'reflect-metadata';
 import { MockAgent, setGlobalDispatcher } from 'undici';
 import { MELI_BASE_URL } from '../src/constants/urls.constant';
-import { currency, description, item } from './__fixtures__/response.fixture';
+import {
+  category,
+  currency,
+  description,
+  item,
+  items,
+} from './__fixtures__/response.fixture';
 
 const agent = new MockAgent();
 agent.disableNetConnect();
@@ -52,7 +58,7 @@ client
 // Currency
 client
   .intercept({
-    path: '/currencies/COP',
+    path: '/currencies/ARS',
     method: 'GET',
   })
   .reply(200, currency);
@@ -71,9 +77,7 @@ client
     path: '/sites/MLA/search?limit=4&q=iphone',
     method: 'GET',
   })
-  .reply(200, {
-    results: [item],
-  });
+  .reply(200, items);
 
 client
   .intercept({
@@ -81,5 +85,14 @@ client
     method: 'GET',
   })
   .reply(400, []);
+
+// Categories
+
+client
+  .intercept({
+    path: '/categories/MLA-CAT-200',
+    method: 'GET',
+  })
+  .reply(200, category);
 
 setGlobalDispatcher(agent);

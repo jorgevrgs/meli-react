@@ -6,23 +6,22 @@ export const author = {
 };
 
 export const item = {
-  id: '200',
+  id: 'MLA-PRO-200',
   title: 'Item 200',
   description: 'full description of item 200',
   free_shipping: true,
-  sold_quantity: 0,
+  sold_quantity: 100,
   picture: 'https://http2.mlstatic.com/D_200.jpg',
   condition: 'new',
   price: {
     amount: 200,
-    currency: 'COP',
+    currency: 'ARS',
     decimal: 2,
   },
 };
 
-export const currency = {
-  id: 'COP',
-  symbol: '$',
-  description: 'Peso colombiano',
-  decimal_places: 2,
+export const items = {
+  author,
+  categories: ['Audio'],
+  items: [item],
 };

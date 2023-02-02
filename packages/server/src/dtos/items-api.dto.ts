@@ -1,5 +1,6 @@
 import { Expose, Transform, Type } from 'class-transformer';
 import { AuthorDto } from './author.dto';
+import { CategoryDto, CategoryPathFromRoot } from './category.dto';
 import { ItemDto } from './item.dto';
 
 export class ItemsApiDto {
@@ -9,6 +10,11 @@ export class ItemsApiDto {
   readonly 'author': AuthorDto;
 
   @Expose()
+  @Type(() => CategoryDto)
+  @Transform(
+    ({ value }) =>
+      value && value.path_from_root.map((v: CategoryPathFromRoot) => v.name)
+  )
   'categories': string[];
 
   @Expose()

@@ -9,3 +9,5 @@ export interface BaseController {
 export interface AppContext {
   itemsService: ItemsService;
 }
+
+export * from './meli';

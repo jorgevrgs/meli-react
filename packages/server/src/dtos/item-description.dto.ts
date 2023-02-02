@@ -1,4 +1,5 @@
 import { Expose } from 'class-transformer';
+import { Snapshot } from './snapshot.dto';
 
 export class ItemDescriptionDto {
   'text': string;
@@ -8,10 +9,5 @@ export class ItemDescriptionDto {
 
   'last_updated': string;
   'date_created': string;
-  'snapshot': {
-    url: string;
-    width: number;
-    height: number;
-    status: string;
-  };
+  'snapshot': Snapshot;
 }

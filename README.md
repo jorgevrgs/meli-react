@@ -86,6 +86,12 @@ Open [http://localhost:5173](http://localhost:5173) with your browser to see the
 pnpm test
 ```
 
+For an e2e test, start the server `pnpm run dev` and run the following command:
+
+```bash
+pnpm test:e2e
+```
+
 ### Deployment
 
 ## Authors

@@ -1,6 +1,7 @@
 {
   "extends": "@tsconfig/recommended/tsconfig.json",
   "compilerOptions": {
+    "skipLibCheck": true,
     "paths": {
       "@app/*": ["./packages/*"]
     }

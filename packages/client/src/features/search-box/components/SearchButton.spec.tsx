@@ -7,8 +7,6 @@ describe("SearchButton", () => {
 
   beforeEach(() => {
     render(<SearchButton onClick={onClick} />);
-
-    screen.debug();
   });
 
   afterEach(() => {

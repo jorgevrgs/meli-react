@@ -6,6 +6,9 @@ describe("SearchBox", () => {
   const renderer = createRenderer();
 
   beforeEach(() => {
+    vi.mock("react-router-dom", () => ({
+      useNavigate: () => vi.fn(),
+    }));
     renderer.render(<SearchBox />);
   });
 

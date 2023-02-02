@@ -1,4 +1,5 @@
-import { MouseEventHandler, useState } from "react";
+import type { MouseEventHandler } from "react";
+import { useEffect, useRef, useState } from "react";
 import SearchButton from "./SearchButton";
 
 interface SearchBoxInputProps {
@@ -7,6 +8,7 @@ interface SearchBoxInputProps {
 
 export default function SearchBoxInput({ onSearch }: SearchBoxInputProps) {
   const [value, setValue] = useState("");
+  const ref = useRef<HTMLInputElement>(null);
 
   const emitSearch = () => {
     onSearch?.(value);
@@ -28,6 +30,10 @@ export default function SearchBoxInput({ onSearch }: SearchBoxInputProps) {
     emitSearch();
   };
 
+  useEffect(() => {
+    ref.current?.focus();
+  }, []);
+
   return (
     <>
       <input
@@ -36,6 +42,8 @@ export default function SearchBoxInput({ onSearch }: SearchBoxInputProps) {
         onChange={handleChange}
         onKeyUp={handleKeyUp}
         placeholder="Nunca dejes de buscar"
+        type="search"
+        ref={ref}
       />
       <SearchButton onClick={handleClick} />
     </>

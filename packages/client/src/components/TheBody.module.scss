@@ -4,7 +4,6 @@
   display: flex;
   background-color: $backgroundColor;
   width: 100vw;
-  min-height: calc(100vh - 5em);
 
   &__container {
     width: 100%;
@@ -12,7 +11,14 @@
     margin-inline: auto;
     display: flex;
     flex-direction: column;
-    background-color: white;
-    border-radius: 0.25rem;
+
+    &__main {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      background-color: white;
+      border-radius: 0.25rem;
+      min-height: calc(100vh - 5em);
+    }
   }
 }

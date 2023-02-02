@@ -16,8 +16,8 @@ export default function SearchResultsPage() {
   const { data, error, isFetching } = useGetItemsQuery(search);
 
   return (
-    <AsyncView error={error && String(error)} isFetching={isFetching}>
-      {data && <ItemsList items={data.items} />}
+    <AsyncView error={error} isFetching={isFetching}>
+      {data && <ItemsList items={data.items} categories={data.categories} />}
     </AsyncView>
   );
 }

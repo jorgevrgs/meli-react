@@ -1,7 +1,7 @@
 import type { ReactNode } from "react";
 
 interface AsyncViewProps {
-  error?: string;
+  error?: unknown;
   isFetching: boolean;
   children: ReactNode;
 }
@@ -16,7 +16,13 @@ export default function AsyncView({
   }
 
   if (error) {
-    return <div>Error: {error}</div>;
+    console.error(error);
+    return (
+      <div>
+        Error: An error has occurred while trying to request data. Please try
+        again or contact the administrator.
+      </div>
+    );
   }
 
   return <>{children}</>;

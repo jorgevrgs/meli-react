@@ -14,7 +14,7 @@ export default function ProductDetailsPage() {
   const { data, error, isFetching } = useGetItemQuery(id);
 
   return (
-    <AsyncView error={error && String(error)} isFetching={isFetching}>
+    <AsyncView error={error} isFetching={isFetching}>
       {data && <Item {...data.item} />}
     </AsyncView>
   );

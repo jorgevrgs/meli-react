@@ -13,7 +13,7 @@ export default function ItemRow({
   free_shipping,
 }: ItemsResult["items"][number]) {
   return (
-    <section className={styles.item}>
+    <section className={styles.item} role="listitem">
       <Picture src={picture} alt={title} width="180" height="180" />
       <div className={styles.item__content}>
         <div className={styles.item__costs}>

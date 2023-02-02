@@ -28,7 +28,7 @@ export interface Item {
 
 export type ItemsResult = {
   author: Author;
-  categories: string[];
+  categories: string[] | null;
   items: Omit<Item, "sold_quantity" | "description">[];
 };
 

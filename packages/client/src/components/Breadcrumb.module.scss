@@ -1,0 +1,16 @@
+.breadcrumb {
+  display: flex;
+  color: #999;
+
+  &__items {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    padding-block: 1rem;
+
+    > *:not(:last-child)::after {
+      content: ">";
+      margin-inline-start: 1rem;
+    }
+  }
+}

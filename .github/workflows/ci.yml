@@ -1,0 +1,90 @@
+name: CI
+
+permissions: {}
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.number || github.sha }}
+  cancel-in-progress: true
+
+jobs:
+  test:
+    timeout-minutes: 20
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest]
+        node_version: [14, 16, 18]
+        include:
+          # Active LTS + other OS
+          - os: macos-latest
+            node_version: 18
+          - os: windows-latest
+            node_version: 18
+      fail-fast: false
+
+    name: "Build&Test: node-${{ matrix.node_version }}, ${{ matrix.os }}"
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          # Assume PRs are less than 50 commits
+          fetch-depth: 50
+
+      - name: Install pnpm
+        if: steps.changed-files.outputs.only_changed != 'true'
+        uses: pnpm/action-setup@v2.2.4
+
+      - name: Set node version to ${{ matrix.node_version }}
+        if: steps.changed-files.outputs.only_changed != 'true'
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node_version }}
+          cache: "pnpm"
+
+      - name: Install deps
+        if: steps.changed-files.outputs.only_changed != 'true'
+        run: pnpm install
+
+      - name: Build
+        if: steps.changed-files.outputs.only_changed != 'true'
+        run: pnpm run build
+
+      - name: Test
+        if: steps.changed-files.outputs.only_changed != 'true'
+        run: pnpm run test
+
+      - name: Lint
+        if: steps.changed-files.outputs.only_changed != 'true'
+        run: pnpm run lint
+
+  lint:
+    timeout-minutes: 10
+    runs-on: ubuntu-latest
+    name: "Lint: node-18, ubuntu-latest"
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v2.2.4
+
+      - name: Set node version to 18
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+          cache: "pnpm"
+
+      - name: Install deps
+        run: pnpm install
+
+      - name: Build
+        run: pnpm run build
+
+      - name: Lint
+        run: pnpm run lint

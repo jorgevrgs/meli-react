@@ -7,7 +7,7 @@
     "build": "pnpm -r --filter='./packages/*' run build",
     "preinstall": "npx only-allow pnpm",
     "dev": "dotenv -e .env.local -- pnpm -r --parallel --filter='./packages/*' run dev",
-    "linter": "eslint .",
+    "lint": "eslint .",
     "test": "pnpm -r --parallel --filter='./packages/*' run test-ci",
     "coverage": "pnpm -r --parallel --filter='./packages/*' run coverage"
   },

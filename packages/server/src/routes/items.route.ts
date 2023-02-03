@@ -14,14 +14,14 @@ export class ItemsRoute implements BaseController {
   @GET()
   async findAll(req: Request, res: Response) {
     const search = req.query.q as string | undefined;
-    const items = await this.itemsService.findAll(search);
+    const items = await this.itemsService?.findAll(search);
     res.json(items);
   }
 
   @route('/:id')
   @GET()
   async findOne(req: Request, res: Response) {
-    const item = await this.itemsService.findOne(req.params.id);
+    const item = await this.itemsService?.findOne(req.params.id);
     res.json(item);
   }
 }

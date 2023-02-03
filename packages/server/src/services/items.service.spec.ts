@@ -9,11 +9,17 @@ import {
   it,
   vi,
 } from 'vitest';
+import { CategoryService } from './category.service';
+import { CurrencyService } from './currency.service';
+import { DescriptionService } from './description.service';
 import { ItemsService } from './items.service';
 import { author, item } from './__fixtures__/items.fixture';
 
 describe('ItemService', () => {
   let service: ItemsService;
+  let categoryService: CategoryService;
+  let currencyService: CurrencyService;
+  let descriptionService: DescriptionService;
   let restoreEnv: () => void;
 
   beforeAll(() => {
@@ -30,7 +36,14 @@ describe('ItemService', () => {
   });
 
   beforeEach(() => {
-    service = new ItemsService();
+    categoryService = new CategoryService();
+    currencyService = new CurrencyService();
+    descriptionService = new DescriptionService();
+    service = new ItemsService({
+      categoryService,
+      currencyService,
+      descriptionService,
+    });
   });
 
   afterEach(() => {

@@ -13,7 +13,7 @@ services:
     networks:
       - meli_react
     ports:
-      - 4173:4173
+      - 8080:8080
     restart: always
     volumes:
       - .:/app

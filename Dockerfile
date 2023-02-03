@@ -20,4 +20,4 @@ RUN pnpm build
 # expose port
 EXPOSE 8080
 
-CMD ["node", "packages/server/dist/index.js"]
+CMD ["pnpm", "start"]

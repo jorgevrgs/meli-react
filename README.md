@@ -16,7 +16,7 @@ Open the web page, search for a product to get some details and the price.
 
 ## Live Demo
 
-[Live Demo Link](https://livedemo.com)
+[Live Demo Link](https://meli-react-client-iua36aujb-jorgevrgs.vercel.app/)
 
 ## Getting Started
 
@@ -105,7 +105,7 @@ docker build -t meli-react .
 To run the app using Docker, run the following command:
 
 ```bash
-docker run -p 4173:4173 meli-react
+docker run -p 8080:8080 meli-react
 ```
 
 Or, use docker-compose:

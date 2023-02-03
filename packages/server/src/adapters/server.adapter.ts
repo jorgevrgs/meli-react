@@ -1,10 +1,13 @@
-import { loadControllers, scopePerRequest } from 'awilix-express';
-import type { ErrorRequestHandler, RequestHandler } from 'express';
+import { scopePerRequest } from 'awilix-express';
+import { ErrorRequestHandler, RequestHandler, Router } from 'express';
 import app from '../apps/express.app';
+import itemsRoute from '../routes/items.route';
 import container from './container.adapter';
 
+const router = Router();
+
 app.use(scopePerRequest(container));
-app.use('/api', loadControllers('../routes/*.route.ts', { cwd: __dirname }));
+app.use('/api', itemsRoute(router));
 
 const notFoundErrorHandler: RequestHandler = (_req, res, next) => {
   res.status(404).json({

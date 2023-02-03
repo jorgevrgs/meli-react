@@ -1,27 +1,26 @@
-import { GET, route } from 'awilix-express';
-import { Request, Response } from 'express';
-import type { AppContext, BaseController } from '../types';
+import { makeInvoker } from 'awilix-express';
+import { Request, Response, Router } from 'express';
+import type { AppContext } from '../types';
 
-@route('/items')
-export class ItemsRoute implements BaseController {
-  private itemsService: AppContext['itemsService'];
+function makeAPI({ itemsService }: AppContext) {
+  return {
+    findAll: async (req: Request, res: Response) => {
+      const search = req.query.q as string | undefined;
+      const items = await itemsService?.findAll(search);
+      res.json(items);
+    },
+    findOne: async (req: Request, res: Response) => {
+      const item = await itemsService?.findOne(req.params.id);
+      res.json(item);
+    },
+  };
+}
 
-  constructor({ itemsService }: AppContext) {
-    this.itemsService = itemsService;
-  }
+export default function (router: Router) {
+  const api = makeInvoker(makeAPI);
 
-  @route('/')
-  @GET()
-  async findAll(req: Request, res: Response) {
-    const search = req.query.q as string | undefined;
-    const items = await this.itemsService?.findAll(search);
-    res.json(items);
-  }
+  router.get('/items', api('findAll'));
+  router.get('/items/:id', api('findOne'));
 
-  @route('/:id')
-  @GET()
-  async findOne(req: Request, res: Response) {
-    const item = await this.itemsService?.findOne(req.params.id);
-    res.json(item);
-  }
+  return router;
 }

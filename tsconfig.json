@@ -3,8 +3,7 @@
   "compilerOptions": {
     "skipLibCheck": true,
     "paths": {
-      "@app/*": ["./packages/*"],
-      "*": ["./node_modules/*", "./node_modules/@types/*"]
+      "@app/*": ["./packages/*"]
     }
   }
 }

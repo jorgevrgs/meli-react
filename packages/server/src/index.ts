@@ -1,3 +1,4 @@
+import 'reflect-metadata';
 import server from './adapters/server.adapter';
 
 const PORT = process.env.VITE_SERVER_PORT

@@ -1,4 +1,4 @@
-FROM node:18-alpine3.16
+FROM node:18-alpine3.16 as builder
 
 WORKDIR /app
 
@@ -18,7 +18,6 @@ RUN pnpm install
 RUN pnpm build
 
 # expose port
-EXPOSE 4173
+EXPOSE 8080
 
-# start
-CMD ["pnpm", "start"]
+CMD ["node", "packages/server/dist/index.js"]

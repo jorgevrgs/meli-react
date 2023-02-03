@@ -11,10 +11,14 @@ const browserOptions: LaunchOptions = {
   },
 };
 
+const PORT = process.env.VITE_SERVER_PORT
+  ? Number(process.env.VITE_SERVER_PORT)
+  : 8080;
+
 export const config = {
   browser: process.env.BROWSER || "chromium",
   browserOptions,
   BASE_URL: "http://localhost:5173",
   IMG_THRESHOLD: { threshold: 0.4 },
-  BASE_API_URL: "http://localhost:3000/",
+  BASE_API_URL: `http://localhost:${PORT}/`,
 };

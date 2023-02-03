@@ -5,6 +5,8 @@ const PORT = process.env.VITE_SERVER_PORT
   ? Number(process.env.VITE_SERVER_PORT)
   : 8080;
 
+const PREFIX = process.env.VITE_SERVER_PREFIX ?? "/api";
+
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react()],
@@ -15,10 +17,10 @@ export default defineConfig({
   },
   server: {
     proxy: {
-      "/api": {
+      [PREFIX]: {
         target: process.env.VITE_SERVER_URL ?? `http://localhost:${PORT}`,
         changeOrigin: true,
-        rewrite: (path) => path.replace(/^\/api/, "/api"),
+        rewrite: (path) => path.replace(PREFIX, "/api"),
       },
     },
   },

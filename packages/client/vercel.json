@@ -2,7 +2,7 @@
   "rewrites": [
     {
       "source": "/fly/(.*)",
-      "destination": "https://falling-leaf-6176.fly.dev/fly/$1"
+      "destination": "https://falling-leaf-6176.fly.dev/api/$1"
     },
     { "source": "/(.*)", "destination": "/" }
   ]
